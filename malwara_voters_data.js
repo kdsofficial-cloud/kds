@@ -3106,3 +3106,4 @@ window.ALL_MALWARA_VOTERS = [
   { p: 237, s: 103, name: "सोनी देवी", rel: "गोविन्द राम", h: "69", epic: "UAQ0740704" },
   { p: 237, s: 104, name: "सुरेश कुमार", rel: "गोविंद राम", h: "69", epic: "UAQ1372697" }
 ];
+windiw.CURRENT_PANCHAYAT_VOTERS = window.ALL_MALWARA_VOTERS;
