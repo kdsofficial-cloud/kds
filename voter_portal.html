@@ -12,9 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-  <!-- Yahan filename ko sahi 'malwara_voters_data.js' ya 'malwara_voter_data.js' ke anusaar rakhein -->
-  <script src="malwara_voters_data.js"></script>
-
   <style>
     body { font-family: 'Noto Sans Devanagari', sans-serif; background-color: #f1f5f9; color: #0f172a; }
     .font-yatra { font-family: 'Yatra One', cursive; }
@@ -44,6 +41,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
+  <!-- Header -->
   <header class="no-print bg-slate-900 text-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center space-x-3">
@@ -76,8 +74,10 @@
     </div>
   </header>
 
+  <!-- Search & Filter Bar -->
   <section class="no-print bg-white border-b border-slate-200 py-2.5 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
+      
       <div class="w-full md:w-3/5 flex flex-wrap items-center gap-2">
         <div class="relative flex-1 min-w-[220px]">
           <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-sm"></i>
@@ -116,6 +116,7 @@
     </div>
   </section>
 
+  <!-- Main Workspace -->
   <main class="flex-1 max-w-7xl w-full mx-auto p-3 md:p-4 flex flex-col lg:flex-row gap-4">
     <aside class="no-print w-full lg:w-80 bg-white rounded-xl shadow-sm border border-slate-200 p-3 h-[480px] lg:h-[840px] flex flex-col">
       <div class="flex items-center justify-between pb-2 border-b border-slate-200">
@@ -132,6 +133,7 @@
     </section>
   </main>
 
+  <!-- Settings Modal -->
   <div id="modalSettings" class="no-print fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-xl max-w-md w-full p-5 shadow-2xl relative">
       <button onclick="closeSettingsModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 text-lg">
@@ -208,6 +210,34 @@
     </div>
   </div>
 
+  <!-- Inline Voter Database to ensure 100% loading without CORS issues -->
+  <script>
+    window.ALL_MALWARA_VOTERS = [
+      { p: 235, s: 1, name: "हस्तु", rel: "नरसाराम", h: "6", epic: "RJ/22/171/291385" },
+      { p: 235, s: 2, name: "गोदाराम", rel: "नरसाराम", h: "6", epic: "RJ/22/171/291386" },
+      { p: 235, s: 3, name: "अन्तरी", rel: "गोदाराम", h: "6", epic: "RJ/22/171/292053" },
+      { p: 235, s: 4, name: "मंछाराम", rel: "नरसाराम", h: "6", epic: "UAQ0512491" },
+      { p: 235, s: 5, name: "काती", rel: "मंछाराम", h: "6", epic: "UAQ0512483" },
+      { p: 235, s: 6, name: "मीना देवी", rel: "हस्सन कुमार", h: "06", epic: "UAQ1425164" },
+      { p: 235, s: 7, name: "हरसन कुमार", rel: "गोदा राम", h: "06", epic: "UAQ1425149" },
+      { p: 235, s: 8, name: "हेमता राम", rel: "गोदाराम", h: "06", epic: "UAQ1425172" },
+      { p: 235, s: 9, name: "वगताराम", rel: "जवाजी", h: "7", epic: "RJ/22/171/291012" },
+      { p: 235, s: 10, name: "मफी", rel: "वगताराम", h: "7", epic: "RJ/22/171/291013" },
+      { p: 235, s: 11, name: "नारणा", rel: "वगताराम", h: "7", epic: "RJ/22/171/291014" },
+      { p: 235, s: 12, name: "मोनाराम", rel: "वगता", h: "7", epic: "RJ/22/171/291015" },
+      { p: 235, s: 13, name: "सुकी", rel: "नारणा", h: "7", epic: "LCN1422054" },
+      { p: 235, s: 14, name: "काली", rel: "मोनाराम", h: "7", epic: "LCN1422062" },
+      { p: 235, s: 15, name: "गीता", rel: "मसराराम", h: "7", epic: "LCN1942804" },
+      { p: 235, s: 16, name: "प्रवीण कुमार", rel: "नाराना राम", h: "7", epic: "UAQ1652320" },
+      { p: 235, s: 17, name: "कैलाश राणा", rel: "मानाराम राणा", h: "7", epic: "UAQ1540541" },
+      { p: 235, s: 18, name: "अरविंद कुमार", rel: "नाराना राम", h: "7", epic: "UAQ1691997" },
+      { p: 235, s: 19, name: "पिंका कुमारी", rel: "मानाराम", h: "7", epic: "UAQ1564632" },
+      { p: 235, s: 20, name: "गोमती देवी", rel: "प्रवीण कुमार", h: "7", epic: "UAQ1652387" }
+    ];
+    window.CURRENT_PANCHAYAT_VOTERS = window.ALL_MALWARA_VOTERS;
+  </script>
+
+  <!-- Portal Script -->
   <script>
     const CANDIDATE_REGISTRY = {
       "1001": { name: "जीव सिंह देवड़ा", post: "सरपंच पद प्रत्याशी", ward: "", panchayat: "ग्राम पंचायत मालवाड़ा", constituency: "145 - रानीवाड़ा", tagline: "विकास • शिक्षा • स्वच्छता • समृद्धि", appeal: "ग्राम पंचायत मालवाड़ा के सर्वांगीण विकास एवं खुशहाली हेतु अपना अमूल्य मत व समर्थन देकर भारी मतों से विजयी बनावें।", symbolStatus: "blank", symbolName: "", symbolImg: null },
