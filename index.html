@@ -1,1 +1,203 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KUNWAR DIGITAL SERVICE | डिजिटल वोटर पर्ची एवं चुनावी प्रचार सेवा मालवाड़ा</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+Devanagari:wght@400;600;700;900&display=swap" rel="stylesheet">
 
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'Noto Sans Devanagari', 'sans-serif'] },
+          colors: {
+            brand: { dark: '#001A33', navy: '#002B49', lightBlue: '#00558F', gold: '#FFAE00', bgLight: '#F4F7FB' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-brand-bgLight text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Top Bar -->
+  <div class="bg-brand-dark text-white text-xs py-2 px-4 border-b border-brand-lightBlue">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2">
+        <span class="bg-brand-gold text-brand-dark font-black px-2 py-0.5 rounded text-[10px] tracking-wider uppercase">Official Campaign Hub</span>
+        <span><i class="fa-solid fa-bullhorn text-brand-gold mr-1"></i> <strong>KUNWAR DIGITAL SERVICE</strong> | डिजिटल चुनाव प्रचार सेवा</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="tel:8440096343" class="hover:text-brand-gold font-bold"><i class="fa-solid fa-phone text-brand-gold"></i> 8440096343</a>
+        <span>|</span>
+        <a href="https://wa.me/918440096343" target="_blank" class="text-emerald-400 font-bold hover:text-emerald-300"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        <span>|</span>
+        <span class="text-slate-400 text-[11px]"><i class="fa-solid fa-location-dot text-rose-400"></i> मालवाड़ा (रानीवाड़ा)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white shadow-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-brand-navy flex items-center justify-center text-brand-gold font-black text-base shadow">KDS</div>
+        <div>
+          <span class="text-lg font-black text-brand-navy leading-none block">KUNWAR <span class="text-brand-gold">DIGITAL SERVICE</span></span>
+          <p class="text-[10px] text-slate-500 font-bold">डिजिटल वोटर पर्ची एवं प्रचार प्रबंधन पोर्टल</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="#formSection" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition">प्रचार हेतु संपर्क</a>
+        <a href="voter_portal.html" class="px-4 py-2 rounded-xl bg-brand-navy hover:bg-brand-lightBlue text-white text-xs font-black shadow transition flex items-center gap-1.5">
+          <i class="fa-solid fa-lock text-brand-gold"></i> उम्मीदवार लॉगिन
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="max-w-7xl mx-auto px-4 py-8 space-y-8 flex-grow w-full">
+    <div class="bg-gradient-to-r from-brand-navy via-brand-lightBlue to-blue-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-3 max-w-2xl">
+        <span class="bg-brand-gold text-brand-dark px-3 py-1 rounded-full text-xs font-black uppercase">ग्राम पंचायत मालवाड़ा चुनाव 2026</span>
+        <h1 class="text-2xl sm:text-4xl font-black">अपने चुनाव प्रचार को बनाएं डिजिटल और हाई-टेक!</h1>
+        <p class="text-slate-200 text-sm leading-relaxed">
+          अब हर वोटर को मिलेगी उसके नाम, क्रम संख्या और मतदान केंद्र के साथ <strong>आपके फोटो और चुनाव चिन्ह वाली सुंदर डिजिटल पर्ची</strong>। एक क्लिक में इमेज डाउनलोड और सीधे व्हाट्सएप पर शेयर।
+        </p>
+        <div class="pt-2 flex flex-wrap gap-3">
+          <a href="#formSection" class="bg-brand-gold text-brand-dark font-black px-6 py-3 rounded-xl text-xs hover:bg-amber-400 transition shadow">
+            <i class="fa-solid fa-file-pen mr-1"></i> प्रचार के लिए अभी आवेदन करें
+          </a>
+          <a href="voter_portal.html" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-xl text-xs border border-white/20 transition">
+            <i class="fa-solid fa-address-card mr-1"></i> वोटर पर्ची पोर्टल देखें
+          </a>
+        </div>
+      </div>
+      <div class="w-full md:w-auto flex justify-center">
+        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 text-center max-w-xs">
+          <i class="fa-solid fa-id-card-clip text-5xl text-brand-gold mb-2"></i>
+          <h4 class="font-bold text-sm">कनवर डिजिटल सर्विस</h4>
+          <p class="text-xs text-slate-300 mt-1">भाग संख्या 235, 236, 237 (मूल नामावली + पूरक 1 से 4 का समेकित डेटा)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="w-12 h-12 bg-amber-100 text-brand-gold rounded-xl flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-image"></i></div>
+        <h3 class="font-black text-base text-brand-navy">उम्मीदवार का पोस्टर बैनर</h3>
+        <p class="text-xs text-slate-600 mt-1">पर्ची के ऊपर प्रत्याशी का नाम, फोटो, पद और चुनाव चिन्ह आकर्षक डिजाइन में सेट रहता है।</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-database"></i></div>
+        <h3 class="font-black text-base text-brand-navy">100% सही व अद्यतन डेटा</h3>
+        <p class="text-xs text-slate-600 mt-1">सरकारी फाइनल रोल तथा सभी 4 पूरक सूचियों के अनुसार सही सरल क्रमांक व बूथ जानकारी।</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-4"><i class="fa-brands fa-whatsapp"></i></div>
+        <h3 class="font-black text-base text-brand-navy">सुरक्षित उम्मीदवार एक्सेस</h3>
+        <p class="text-xs text-slate-600 mt-1">प्रत्येक प्रत्याशी को उसका व्यक्तिगत पिन/लिंक दिया जाता है जिससे केवल उसका प्रचार दिखे।</p>
+      </div>
+    </div>
+
+    <!-- Google Form Section -->
+    <section id="formSection" class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+      <div class="bg-gradient-to-r from-brand-navy to-brand-lightBlue p-6 text-white text-center">
+        <span class="bg-brand-gold text-brand-dark px-3 py-1 rounded text-xs font-black uppercase">प्रत्याशी पंजीकरण फॉर्म</span>
+        <h2 class="text-2xl font-black mt-2">डिजिटल प्रचार सेवा हेतु संपर्क / आवेदन फॉर्म</h2>
+        <p class="text-slate-200 text-xs mt-1">यदि आप मालवाड़ा पंचायत में चुनाव लड़ रहे हैं तो नीचे दिया फॉर्म भरें। हमारी टीम 1 घंटे में आपका पोर्टल सक्रिय कर देगी।</p>
+      </div>
+
+      <div class="p-6 sm:p-10 max-w-3xl mx-auto">
+        <!-- Form submit can be connected to Google Forms Action URL or WhatsApp -->
+        <form id="campaignRegisterForm" onsubmit="handleFormSubmit(event)" class="space-y-4 text-xs font-semibold">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-slate-700 uppercase font-black mb-1">उम्मीदवार का पूरा नाम *</label>
+              <input type="text" id="candName" required placeholder="उदा. सुरेश कुमार देवासी" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:border-brand-navy outline-none" />
+            </div>
+            <div>
+              <label class="block text-slate-700 uppercase font-black mb-1">मोबाइल नंबर (WhatsApp) *</label>
+              <input type="tel" id="candMobile" required maxlength="10" placeholder="उदा. 8440096343" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:border-brand-navy outline-none" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-slate-700 uppercase font-black mb-1">प्रत्याशी पद *</label>
+              <select id="candPost" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:border-brand-navy outline-none font-bold">
+                <option value="सरपंच">सरपंच पद हेतु</option>
+                <option value="उपसरपंच">उपसरपंच पद हेतु</option>
+                <option value="वार्ड पंच">वार्ड पंच पद हेतु</option>
+                <option value="पंचायत समिति सदस्य (BDC)">पंचायत समिति सदस्य (BDC)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-700 uppercase font-black mb-1">वार्ड संख्या या क्षेत्र (यदि लागू हो)</label>
+              <input type="text" id="candWard" placeholder="उदा. वार्ड नं. 04 / पूरी पंचायत" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:border-brand-navy outline-none" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-slate-700 uppercase font-black mb-1">आवंटित चुनाव चिन्ह *</label>
+              <input type="text" id="candSymbol" required placeholder="उदा. बल्ला / उगता सूरज / तराजू" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:border-brand-navy outline-none" />
+            </div>
+            <div>
+              <label class="block text-slate-700 uppercase font-black mb-1">चुनाव स्लोगन / नारा</label>
+              <input type="text" id="candSlogan" placeholder="उदा. गांव का विकास, सबका विश्वास" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:border-brand-navy outline-none" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-slate-700 uppercase font-black mb-1">विशेष नोट या संदेश</label>
+            <textarea id="candNote" rows="2" placeholder="कोई विशेष फोटो या पोस्टर जोड़ना हो तो यहाँ लिखें..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:border-brand-navy outline-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full bg-brand-gold hover:bg-amber-400 text-brand-dark font-black py-3.5 rounded-xl text-sm shadow-md transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> आवेदन सबमिट करें (WhatsApp पर विवरण भेजें)
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-navy text-white text-xs py-5 px-4 text-center border-t border-brand-lightBlue mt-8">
+    <p class="font-bold">© 2026 KUNWAR DIGITAL SERVICE (KDS), MALWARA | All Rights Reserved.</p>
+    <p class="text-slate-400 mt-1">संचालक: <strong>मनोहर सिंह</strong> (मोबाइल: 8440096343) | मालवाड़ा, रानीवाड़ा, जालोर (राज.)</p>
+  </footer>
+
+  <script>
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('candName').value;
+      const mobile = document.getElementById('candMobile').value;
+      const post = document.getElementById('candPost').value;
+      const ward = document.getElementById('candWard').value || 'लागू नहीं';
+      const symbol = document.getElementById('candSymbol').value;
+      const slogan = document.getElementById('candSlogan').value || 'विकास का संकल्प';
+
+      const waMsg = encodeURIComponent(
+        `*KUNWAR DIGITAL SERVICE - प्रचार आवेदन*\n\n` +
+        `👤 *प्रत्याशी:* ${name}\n` +
+        `📞 *मोबाइल:* ${mobile}\n` +
+        `🎖️ *पद:* ${post}\n` +
+        `📍 *वार्ड/क्षेत्र:* ${ward}\n` +
+        `🗳️ *चुनाव चिन्ह:* ${symbol}\n` +
+        `📢 *स्लोगन:* ${slogan}\n\n` +
+        `कृपया मेरा डिजिटल वोटर पर्ची पोर्टल सक्रिय करें।`
+      );
+
+      alert("धन्यवाद! आपका आवेदन तैयार है। अब यह जानकारी व्हाट्सएप पर प्रेषित हो रही है।");
+      window.open(`https://wa.me/918440096343?text=${waMsg}`, '_blank');
+    }
+  </script>
+</body>
+</html>
