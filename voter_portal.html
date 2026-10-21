@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KUNWAR DIGITAL SERVICE - मतदाता पर्ची पोर्टल</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Consolidated Data File -->
+  <script src="voters_data.js"></script>
+  <style>
+    body { background-color: #f1f5f9; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  </style>
+</head>
+<body class="p-3 sm:p-5">
+
+  <div class="max-w-md mx-auto space-y-4">
+
+    <!-- Top Brand Header -->
+    <div class="bg-gradient-to-r from-slate-900 to-blue-950 text-white text-center p-3.5 rounded-2xl shadow-md border-b-2 border-amber-500">
+      <div class="flex items-center justify-center gap-2">
+        <div class="w-7 h-7 bg-amber-500 text-slate-900 font-black rounded-lg flex items-center justify-center text-xs">KDS</div>
+        <h1 class="text-base sm:text-lg font-black tracking-wide">KUNWAR DIGITAL SERVICE</h1>
+      </div>
+      <p class="text-[11px] text-slate-300 mt-0.5 font-semibold">ग्राम पंचायत मालवाड़ा • अधिकृत डिजिटल मतदाता सेवा</p>
+    </div>
+
+    <!-- Login Modal Box (Agar candidate logged in nahi hai) -->
+    <div id="loginCard" class="bg-white p-5 rounded-2xl shadow-md border border-slate-200 text-center space-y-3">
+      <div class="w-12 h-12 bg-blue-50 text-blue-800 rounded-full flex items-center justify-center mx-auto text-xl">
+        <i class="fa-solid fa-user-shield"></i>
+      </div>
+      <h3 class="font-black text-base text-slate-900">उम्मीदवार एक्सेस लॉगिन (Login)</h3>
+      <p class="text-xs text-slate-500">अपना आवंटित सीक्रेट पिन (PIN) दर्ज करें ताकि केवल आपकी प्रचार पर्ची तैयार हो सके।</p>
+      
+      <div class="space-y-2">
+        <input type="password" id="accessPin" placeholder="सीक्रेट पिन दर्ज करें (उदा. 1001)" class="w-full text-center tracking-widest text-lg font-black p-2.5 border-2 border-slate-300 rounded-xl outline-none focus:border-blue-600" />
+        <button onclick="loginCandidate()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-black py-2.5 rounded-xl text-xs shadow">
+          <i class="fa-solid fa-arrow-right-to-bracket mr-1"></i> पोर्टल खोलें
+        </button>
+      </div>
+      <div class="text-[11px] text-slate-400 pt-1">डेमो पिन: <strong>1001</strong> (सरपंच), <strong>1002</strong> (सरपंच 2), <strong>1003</strong> (वार्ड पंच)</div>
+    </div>
+
+    <!-- Main Workspace (Hidden before Login) -->
+    <div id="portalWorkspace" class="hidden space-y-4">
+
+      <!-- Candidate Status Banner -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center text-xs shadow-sm">
+        <div>
+          <span class="text-slate-500">सक्रिय प्रत्याशी:</span>
+          <strong id="activeCandLabel" class="text-blue-900 block font-black">-</strong>
+        </div>
+        <button onclick="logoutCandidate()" class="bg-rose-50 text-rose-600 hover:bg-rose-100 font-bold px-2.5 py-1 rounded-lg text-[11px] border border-rose-200">
+          <i class="fa-solid fa-power-off mr-0.5"></i> लॉगआउट
+        </button>
+      </div>
+
+      <!-- Search Box -->
+      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+        <label class="block text-xs font-black uppercase text-slate-700 mb-1.5 text-center">वोटर पर्ची खोजें (नाम / EPIC / मकान नं.)</label>
+        <div class="relative">
+          <input type="text" id="searchInput" placeholder="उदा. UAQ... या नाम लिखें" oninput="searchVoter()" class="w-full p-3 border-2 border-slate-300 rounded-xl text-sm outline-none focus:border-blue-600 font-bold" />
+        </div>
+        <div id="dropdownList" class="mt-2 max-h-48 overflow-y-auto border border-slate-200 rounded-xl hidden bg-white divide-y divide-slate-100 shadow-lg text-xs"></div>
+      </div>
+
+      <!-- Voter Slip Preview (Rendered Card) -->
+      <div id="slipContainer" class="hidden space-y-3">
+        <div id="slipCard" class="bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-xl">
+          
+          <!-- Dynamic Poster -->
+          <div id="posterHeader" class="text-white text-center p-3.5 transition-colors">
+            <p class="text-[10px] tracking-widest opacity-90">॥ जय श्री कृष्णा ॥</p>
+            <h2 id="posterPost" class="text-base font-black mt-0.5">ग्राम पंचायत मालवाड़ा चुनाव 2026</h2>
+            <p id="posterSlogan" class="text-[11px] opacity-95">ईमानदार एवं कर्मठ प्रत्याशी को विजयी बनाएं</p>
+          </div>
+
+          <div class="flex items-center justify-between px-4 py-2.5 bg-amber-50/70 border-b-2 border-dashed border-amber-500">
+            <div>
+              <span class="text-[10px] text-amber-900 font-black uppercase block">प्रत्याशी का नाम</span>
+              <h3 id="posterName" class="text-base font-black text-amber-950">-</h3>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] text-amber-900 font-black uppercase block">चुनाव चिन्ह</span>
+              <span id="posterSymbol" class="text-xl font-black block mt-0.5">🗳️</span>
+            </div>
+          </div>
+
+          <!-- Official Voter Data -->
+          <div class="p-4 space-y-1.5 text-xs bg-white">
+            <div class="text-center font-black text-blue-900 pb-1.5 mb-2 border-b border-slate-200">मतदाता सूचना पर्ची (निर्वाचक नामावली 2026)</div>
+            <div class="flex justify-between"><span class="text-slate-500">विधानसभा क्षेत्र:</span><strong class="text-slate-800">145 - रानीवाड़ा (सामान्य)</strong></div>
+            <div class="flex justify-between"><span class="text-slate-500">भाग संख्या (Part):</span><strong id="cardPart" class="text-slate-800">-</strong></div>
+            <div class="flex justify-between"><span class="text-slate-500">क्रम संख्या (Serial):</span><strong id="cardSerial" class="text-rose-600 text-sm font-black">-</strong></div>
+            <div class="flex justify-between"><span class="text-slate-500">वोटर आईडी (EPIC):</span><strong id="cardEpic" class="text-blue-700 font-bold">-</strong></div>
+            <div class="flex justify-between"><span class="text-slate-500">मतदाता का नाम:</span><strong id="cardName" class="text-slate-900 text-sm">-</strong></div>
+            <div class="flex justify-between"><span class="text-slate-500">पिता / पति का नाम:</span><strong id="cardRel" class="text-slate-800">-</strong></div>
+            <div class="flex justify-between"><span class="text-slate-500">मकान नंबर:</span><strong id="cardHouse" class="text-slate-800">-</strong></div>
+
+            <div class="mt-2 bg-slate-50 p-2.5 rounded-xl border-l-4 border-blue-900">
+              <span class="text-[11px] text-slate-500 block font-semibold">मतदान केंद्र का भवन व पता:</span>
+              <strong id="cardBooth" class="text-slate-800 text-[11px] block mt-0.5">-</strong>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <button onclick="downloadSlipPNG()" class="bg-slate-900 hover:bg-slate-800 text-white font-black py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow">
+            <i class="fa-solid fa-download"></i> पर्ची डाउनलोड
+          </button>
+          <button onclick="shareSlipWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow">
+            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp शेयर
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Registered Candidates with PIN Access Control
+    const CANDIDATES_DB = {
+      "1001": {
+        name: "दिनेश कुमार देवासी",
+        post: "सरपंच पद हेतु प्रत्याशी",
+        symbol: "🏏 बल्ला",
+        slogan: "मालवाड़ा पंचायत का समग्र विकास ही हमारा संकल्प",
+        bg: "linear-gradient(135deg, #c2410c, #ea580c)"
+      },
+      "1002": {
+        name: "महिपाल सिंह राठौड़",
+        post: "सरपंच पद हेतु प्रत्याशी",
+        symbol: "☀️ उगता सूरज",
+        slogan: "सच्चाई, ईमानदारी और युवा ऊर्जा के साथ सेवा",
+        bg: "linear-gradient(135deg, #1e3a8a, #2563eb)"
+      },
+      "1003": {
+        name: "प्रकाश कुमार सेन",
+        post: "वार्ड पंच प्रत्याशी",
+        symbol: "⚖️ तराजू",
+        slogan: "हर वार्ड का सशक्त एवं पारदर्शी विकास",
+        bg: "linear-gradient(135deg, #047857, #10b981)"
+      }
+    };
+
+    const BOOTHS = {
+      235: "राजकीय उच्च माध्यमिक विद्यालय, बायाँ कमरा 2, मालवाड़ा",
+      236: "राजकीय उच्च माध्यमिक विद्यालय लाधाणी परिसर, मालवाड़ा",
+      237: "राजकीय उच्च माध्यमिक विद्यालय, बायाँ कमरा 5, मालवाड़ा"
+    };
+
+    let loggedInCandidate = null;
+    let currentVoter = null;
+
+    // Check if PIN passed via URL (e.g. voter_portal.html?pin=1001)
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pin = urlParams.get('pin');
+      if (pin && CANDIDATES_DB[pin]) {
+        document.getElementById('accessPin').value = pin;
+        loginCandidate();
+      }
+    };
+
+    function loginCandidate() {
+      const pin = document.getElementById('accessPin').value.trim();
+      if (CANDIDATES_DB[pin]) {
+        loggedInCandidate = CANDIDATES_DB[pin];
+        document.getElementById('loginCard').classList.add('hidden');
+        document.getElementById('portalWorkspace').classList.remove('hidden');
+
+        document.getElementById('activeCandLabel').innerText = `${loggedInCandidate.name} (${loggedInCandidate.post})`;
+        document.getElementById('posterName').innerText = loggedInCandidate.name;
+        document.getElementById('posterPost').innerText = loggedInCandidate.post;
+        document.getElementById('posterSymbol').innerText = loggedInCandidate.symbol;
+        document.getElementById('posterSlogan').innerText = loggedInCandidate.slogan;
+        document.getElementById('posterHeader').style.background = loggedInCandidate.bg;
+      } else {
+        alert("अमान्य पिन (Invalid PIN)! कृपया सही पिन दर्ज करें।");
+      }
+    }
+
+    function logoutCandidate() {
+      loggedInCandidate = null;
+      document.getElementById('accessPin').value = '';
+      document.getElementById('loginCard').classList.remove('hidden');
+      document.getElementById('portalWorkspace').classList.add('hidden');
+      document.getElementById('slipContainer').classList.add('hidden');
+    }
+
+    function searchVoter() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const dropdown = document.getElementById('dropdownList');
+      dropdown.innerHTML = '';
+
+      if (q.length < 2) {
+        dropdown.classList.add('hidden');
+        return;
+      }
+
+      const list = window.ALL_MALWARA_VOTERS || [];
+      const matches = list.filter(v => 
+        v.name.toLowerCase().includes(q) || 
+        v.epic.toLowerCase().includes(q) || 
+        v.h.toLowerCase().includes(q) || 
+        v.s.toString() === q
+      );
+
+      if (matches.length > 0) {
+        dropdown.classList.remove('hidden');
+        matches.slice(0, 15).forEach(v => {
+          const row = document.createElement('div');
+          row.className = 'p-2.5 hover:bg-blue-50 cursor-pointer flex justify-between items-center';
+          row.innerHTML = `<span><b>${v.name}</b> (भाग ${v.p}, क्र. ${v.s})</span> <span class="text-blue-600 font-bold">${v.epic}</span>`;
+          row.onclick = () => selectVoter(v);
+          dropdown.appendChild(row);
+        });
+      } else {
+        dropdown.classList.add('hidden');
+      }
+    }
+
+    function selectVoter(v) {
+      currentVoter = v;
+      document.getElementById('dropdownList').classList.add('hidden');
+      document.getElementById('slipContainer').classList.remove('hidden');
+
+      document.getElementById('cardPart').innerText = v.p;
+      document.getElementById('cardSerial').innerText = v.s;
+      document.getElementById('cardEpic').innerText = v.epic;
+      document.getElementById('cardName').innerText = v.name;
+      document.getElementById('cardRel').innerText = v.rel;
+      document.getElementById('cardHouse').innerText = v.h;
+      document.getElementById('cardBooth').innerText = BOOTHS[v.p] || "राजकीय उच्च माध्यमिक विद्यालय, मालवाड़ा";
+    }
+
+    function downloadSlipPNG() {
+      const card = document.getElementById('slipCard');
+      html2canvas(card, { scale: 2 }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `VoterSlip_${currentVoter.s}_${currentVoter.name}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+
+    function shareSlipWhatsApp() {
+      if (!currentVoter || !loggedInCandidate) return;
+      const booth = BOOTHS[currentVoter.p];
+      const text = encodeURIComponent(
+        `*KUNWAR DIGITAL SERVICE - मतदाता सूचना पर्ची*\n` +
+        `*ग्राम पंचायत मालवाड़ा चुनाव 2026*\n\n` +
+        `🗳️ *प्रत्याशी:* ${loggedInCandidate.name} (${loggedInCandidate.post})\n` +
+        `🎯 *चुनाव चिन्ह:* ${loggedInCandidate.symbol}\n\n` +
+        `━━━━━━━━━━━━━━━\n` +
+        `👤 *मतदाता का नाम:* ${currentVoter.name}\n` +
+        `🔢 *क्रम संख्या (Serial No.):* ${currentVoter.s}\n` +
+        `🏛️ *भाग संख्या (Part No.):* ${currentVoter.p}\n` +
+        `🆔 *वोटर आईडी (EPIC):* ${currentVoter.epic}\n` +
+        `🏠 *मकान नंबर:* ${currentVoter.h}\n` +
+        `📍 *मतदान केंद्र:* ${booth}\n` +
+        `━━━━━━━━━━━━━━━\n\n` +
+        `कृपया अपना बहुमूल्य वोट देकर भारी मतों से विजयी बनाएं!`
+      );
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    }
+  </script>
+</body>
+</html>
